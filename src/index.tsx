@@ -12,7 +12,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Gotham',
+    fontFamily: 'NYU Perstare, Arial, sans-serif',
   }
 });
 
