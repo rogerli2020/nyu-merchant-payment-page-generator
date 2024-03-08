@@ -1,4 +1,3 @@
-import ReactDOM from "react-dom"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { 
   Select,
@@ -35,13 +34,39 @@ enum SchoolEnum {
 }
 
 interface IFormInput {
-  storeID: number
+  // Payment Processor Fields
   paymentProcessor: GenderEnum
+  storeID: number
+  chartfield1: string
+  chartfield2: string
+
+  // General Information Fields
   storeName: string
   schoolSelection: SchoolEnum
   storeBlurb: string
   refundPolicy: string
+  termsOfService: string
+
+  // Event/Organzation Information Fields
   eventName: string
+  eventImageURL: string
+  eventDescription: string
+  eventAddr1: string
+  eventAddr2: string
+  eventAddr3: string
+  eventPhone: string
+  eventEmail: string
+
+  // Modifiers Fields
+  modifiersSectionTitle: string
+  modifiers: string
+
+  // Payment Options Fields
+  paymentOptions: string
+
+  // Promo Codes Fields
+  promoCodes: string
+
 }
 
 export default function PageForm() {
@@ -49,7 +74,6 @@ export default function PageForm() {
   const onSubmit: SubmitHandler<IFormInput> = (data) => 
   {
     console.log(data);
-    alert('Submitted!');
   }
 
   return (
@@ -63,9 +87,9 @@ export default function PageForm() {
           Upload Input Data
           <input type="file" accept=".json, .txt" hidden/>
       </Button>
-      <FormHelperText style={{marginLeft:'10px', marginTop:'0px'}}>
-        If applicable, you can upload a text file containing the input data, and the application will 
-        automatically parse your data and populate the fields.
+      <FormHelperText style={{marginLeft:'10px'}}>
+          If applicable, you can upload a text file containing the input data, and the application will 
+          automatically parse your data and populate the fields.
       </FormHelperText>
 
       <Divider textAlign="center" style={{marginTop:'25px'}}><Chip label="1. Payment Processor Information" size="small" /></Divider>
@@ -80,7 +104,7 @@ export default function PageForm() {
       </Select>
 
       <TextField 
-        {...register("storeName")}
+        {...register("storeID")}
         label="TEST Store ID"
         id="TEST_STORE_ID"
         defaultValue=""
@@ -91,7 +115,7 @@ export default function PageForm() {
       />
 
       <TextField 
-        {...register("storeName")}
+        {...register("chartfield1")}
         label="Chartfield 1"
         defaultValue=""
         variant="filled"
@@ -100,7 +124,7 @@ export default function PageForm() {
       />
 
       <TextField 
-        {...register("storeName")}
+        {...register("chartfield2")}
         label="Chartfield 2"
         defaultValue=""
         variant="filled"
@@ -169,7 +193,7 @@ export default function PageForm() {
 
       {/* Blurb */}
       <TextField 
-        {...register("refundPolicy")}
+        {...register("termsOfService")}
         label="Terms of Service HTML"
         defaultValue=""
         helperText="Enter the raw HTML of a message detailing the TOS of the store."
@@ -191,9 +215,18 @@ export default function PageForm() {
         required
       />
 
+      {/* Event Name */}
+      <TextField 
+        {...register("eventImageURL")}
+        label="Event/Organization Image URL"
+        defaultValue=""
+        helperText="The URL to a representative image of the event/organization"
+        variant="filled"
+      />
+
       {/* Event Description */}
       <TextField 
-        {...register("eventName")}
+        {...register("eventDescription")}
         label="Event/Organization Description HTML"
         defaultValue=""
         helperText="Enter the raw HTML of the description of the organization or event."
@@ -205,7 +238,7 @@ export default function PageForm() {
 
       {/* Event Address */}
       <TextField 
-        {...register("eventName")}
+        {...register("eventAddr1")}
         label="Address Line 1"
         defaultValue=""
         helperText="Line 1 of the event/organization's address"
@@ -213,7 +246,7 @@ export default function PageForm() {
       />
 
       <TextField 
-        {...register("eventName")}
+        {...register("eventAddr2")}
         label="Address Line 2"
         defaultValue=""
         helperText="Line 2 of the event/organization's address"
@@ -222,7 +255,7 @@ export default function PageForm() {
 
       {/* Event Address */}
       <TextField 
-        {...register("eventName")}
+        {...register("eventAddr3")}
         label="City, State, Country, and Zip Code"
         defaultValue=""
         helperText="Enter city, state, (country), and zip code of the address"
@@ -231,7 +264,7 @@ export default function PageForm() {
 
       {/* Event Address */}
       <TextField 
-        {...register("eventName")}
+        {...register("eventPhone")}
         label="Phone"
         defaultValue=""
         helperText="Phone number if applicable."
@@ -240,7 +273,7 @@ export default function PageForm() {
 
       {/* Event Address */}
       <TextField 
-        {...register("eventName")}
+        {...register("eventEmail")}
         label="Email"
         defaultValue=""
         helperText="Email address if applicable."
@@ -250,7 +283,7 @@ export default function PageForm() {
       {/* Modifiers */}
       <Divider textAlign="center" style={{marginTop:'25px'}}><Chip label="4. Modifiers" size="small" /></Divider>
       <TextField 
-        {...register("eventName")}
+        {...register("modifiersSectionTitle")}
         label="Modifiers Section Title"
         defaultValue=""
         helperText="Enter title of Modifiers section, such as 'Registrant Information.'"
@@ -258,7 +291,7 @@ export default function PageForm() {
         required
       />
       <TextField 
-        {...register("eventName")}
+        {...register("modifiers")}
         label="Modifiers"
         defaultValue=""
         helperText={"Follow the following format guide so the application can parse your input."}
@@ -272,7 +305,7 @@ export default function PageForm() {
       {/* Payment Options */}
       <Divider textAlign="center" style={{marginTop:'25px'}}><Chip label="5. Payment Options" size="small" /></Divider>
       <TextField 
-        {...register("eventName")}
+        {...register("paymentOptions")}
         label="Payment Options"
         defaultValue=""
         helperText={"Follow the following format guide so the application can parse your input."}
@@ -286,7 +319,7 @@ export default function PageForm() {
       {/* Promo Codes */}
       <Divider textAlign="center" style={{marginTop:'25px'}}><Chip label="6. Promo Codes" size="small" /></Divider>
       <TextField 
-        {...register("eventName")}
+        {...register("promoCodes")}
         label="Promo Codes"
         defaultValue=""
         helperText={"Follow the following format guide so the application can parse your input."}
