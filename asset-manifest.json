@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/nyu-merchant-payment-page-generator/static/css/main.8165dfd6.css",
-    "main.js": "/nyu-merchant-payment-page-generator/static/js/main.4b04c5e9.js",
+    "main.js": "/nyu-merchant-payment-page-generator/static/js/main.fb4d8ffc.js",
     "static/js/453.eb83ae1e.chunk.js": "/nyu-merchant-payment-page-generator/static/js/453.eb83ae1e.chunk.js",
     "index.html": "/nyu-merchant-payment-page-generator/index.html",
     "main.8165dfd6.css.map": "/nyu-merchant-payment-page-generator/static/css/main.8165dfd6.css.map",
-    "main.4b04c5e9.js.map": "/nyu-merchant-payment-page-generator/static/js/main.4b04c5e9.js.map",
+    "main.fb4d8ffc.js.map": "/nyu-merchant-payment-page-generator/static/js/main.fb4d8ffc.js.map",
     "453.eb83ae1e.chunk.js.map": "/nyu-merchant-payment-page-generator/static/js/453.eb83ae1e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8165dfd6.css",
-    "static/js/main.4b04c5e9.js"
+    "static/js/main.fb4d8ffc.js"
   ]
 }
