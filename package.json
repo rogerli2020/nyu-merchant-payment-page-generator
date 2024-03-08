@@ -2,7 +2,7 @@
   "name": "payment-page-generator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rogerli2020.github.io/nyu-merchant-payment-page-generator/",
+  "homepage": "https://rogerli2020.github.io/nyu-merchant-payment-page-generator",
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
