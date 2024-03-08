@@ -10,7 +10,7 @@ interface SimpleCollapseProps {
 }
 
 const guide1 = (
-  <Paper variant="outlined" elevation={12} style={{padding: '10px', backgroundColor:'Cornsilk'}}>
+  <Paper variant="elevation" elevation={12} style={{padding: '10px', backgroundColor:'Cornsilk'}}>
     <Typography align="center" variant="h6"><strong>MODIFIERS INPUT FORMAT GUIDE</strong></Typography>
     <Divider/>
     <Typography>
@@ -43,7 +43,7 @@ const guide1 = (
 );
 
 const guide2 = (
-  <Paper variant="outlined" elevation={24} style={{padding: '10px', backgroundColor:'Cornsilk'}}>
+  <Paper variant="elevation" elevation={12} style={{padding: '10px', backgroundColor:'Cornsilk'}}>
     <Typography align="center" variant="h6"><strong>PAYMENT OPTIONS INPUT FORMAT GUIDE</strong></Typography>
     <Divider/>
     <Typography>
@@ -76,7 +76,7 @@ const guide2 = (
 );
 
 const guide3 = (
-  <Paper variant="outlined" elevation={24} style={{padding: '10px', backgroundColor:'Cornsilk'}}>
+  <Paper variant="elevation" elevation={12} style={{padding: '10px', backgroundColor:'Cornsilk'}}>
     <Typography align="center" variant="h6"><strong>PROMO CODE INPUT FORMAT GUIDE</strong></Typography>
     <Divider/>
     <Typography>

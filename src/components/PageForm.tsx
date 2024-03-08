@@ -13,6 +13,7 @@ import './CodeBlock.css'
 import SimpleCollapse from "./SimpleCollapse"
 import DownloadIcon from '@mui/icons-material/Download';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import UploadIcon from '@mui/icons-material/Upload';
 
 enum GenderEnum {
   upay = "Touchnet UPay",
@@ -53,6 +54,19 @@ export default function PageForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "10px", flex: '1', marginRight:'25px' }}>
+
+      <Button 
+          variant="outlined" 
+          component="label"
+      >
+          <UploadIcon fontSize='small'/>
+          Upload Input Data
+          <input type="file" accept=".json, .txt" hidden/>
+      </Button>
+      <FormHelperText style={{marginLeft:'10px', marginTop:'0px'}}>
+        If applicable, you can upload a text file containing the input data, and the application will 
+        automatically parse your data and populate the fields.
+      </FormHelperText>
 
       <Divider textAlign="center" style={{marginTop:'25px'}}><Chip label="1. Payment Processor Information" size="small" /></Divider>
       <Select 

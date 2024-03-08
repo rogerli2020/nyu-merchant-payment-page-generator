@@ -41,7 +41,6 @@ const PreviewPage = () => {
         spacing={1}   
         divider={<Divider orientation="vertical" flexItem />}
         height={'100%'}
-        style={{marginTop:'25px'}}
     >
         <Alert severity="info">
             The preview below is only intended for confirming the correctness of the visuals and layout of the payment page. 
@@ -50,8 +49,8 @@ const PreviewPage = () => {
         <Paper style={{height: '100%'}} elevation={24} variant='outlined'>
             <iframe
                 title="Embedded TypeScript HTML"
-                // srcDoc={rawHtml}
-                src="./html_template/homepage.html"
+                srcDoc={rawHtml}
+                // src="./html_template/homepage.html"
                 style={{
                     width:"100%",
                     height:"100%",
