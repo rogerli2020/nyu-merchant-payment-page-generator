@@ -14,30 +14,30 @@ const guide1 = (
     <Typography align="center" variant="h6"><strong>MODIFIERS INPUT FORMAT GUIDE</strong></Typography>
     <Divider/>
     <Typography>
-    <ol>
-      <li>
-        Enter the information of a modifier in comma separated format as specified below.
-      </li>
-      <li>
-        If the field is a text input field, use this format: <strong>text,[MODIFIER FIELD ID],[MODIFIER FIELD NAME],[REQUIRED],[STRING LENGTH LIMIT]</strong>
-      </li>
-      <li>
-        If the field is a dropdown field, use this format: <strong>dropdown,[MODIFIER FIELD ID],[MODIFIER FIELD NAME],[REQUIRED],[OPTION1 VALUE],[OPTION1 NAME],[OPTION2 VALUE],[OPTION2 NAME]...</strong>
-      </li>
-      <li>
-        Start a new line each time when you're entering the information of a new modifier. Make sure to not use any commas in any field as commas are reserved for the purpose of parsing your input.
-      </li>
-      <li>
-        Example input:<br/>
-        <div className="github-code">
-          <code>
-            text,REGISTRANT_FULL_NAME,Registrant Full Name,true,50<br/>
-            dropdown,REGISTRANT_TYPE,Registrant Type,false,UNDERGRAD_STU,Undergraduate,GRAD_STU,Graduate Student,PROF,Professor
-          </code><br/>
-        </div>
-        This example input generates 2 modifier fields: a required Registrant Full Name field with maximum 50 characters, and an optional Registrant Type field with 3 options: Undergraduate, Graduate Student, and Professor.
-      </li>
-    </ol>
+      <ol>
+        <li>
+          Enter the information of a modifier in comma separated format as specified below.
+        </li>
+        <li>
+          If the field is a text input field, use this format: <strong>text,[MODIFIER FIELD ID],[MODIFIER FIELD NAME],[REQUIRED],[STRING LENGTH LIMIT]</strong>
+        </li>
+        <li>
+          If the field is a dropdown field, use this format: <strong>dropdown,[MODIFIER FIELD ID],[MODIFIER FIELD NAME],[REQUIRED],[OPTION1 VALUE],[OPTION1 NAME],[OPTION2 VALUE],[OPTION2 NAME]...</strong>
+        </li>
+        <li>
+          Start a new line each time when you're entering the information of a new modifier. Make sure to not use any commas in any field as commas are reserved for the purpose of parsing your input.
+        </li>
+        <li>
+          Example input:<br/>
+          <div className="github-code">
+            <code>
+              text,REGISTRANT_FULL_NAME,Registrant Full Name,true,50<br/>
+              dropdown,REGISTRANT_TYPE,Registrant Type,false,UNDERGRAD_STU,Undergraduate,GRAD_STU,Graduate Student,PROF,Professor
+            </code><br/>
+          </div>
+          This example input generates 2 modifier fields: a required Registrant Full Name field with maximum 50 characters, and an optional Registrant Type field with 3 options: Undergraduate, Graduate Student, and Professor.
+        </li>
+      </ol>
     </Typography>
   </Paper>
 );

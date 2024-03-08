@@ -13,6 +13,8 @@ import SimpleCollapse from "./SimpleCollapse"
 import DownloadIcon from '@mui/icons-material/Download';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import UploadIcon from '@mui/icons-material/Upload';
+import createHomepageHTML from "../utils/createHomepageHTML";
+import { useDispatch } from "react-redux";
 
 enum GenderEnum {
   upay = "Touchnet UPay",
@@ -70,15 +72,17 @@ interface IFormInput {
 }
 
 export default function PageForm() {
+  const dispatch = useDispatch()
   const { register, handleSubmit } = useForm<IFormInput>()
   const onSubmit: SubmitHandler<IFormInput> = (data) => 
   {
+    createHomepageHTML(data, dispatch)
     console.log(data);
   }
 
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "10px", flex: '1', marginRight:'25px' }}>
-
       <Button 
           variant="outlined" 
           component="label"
