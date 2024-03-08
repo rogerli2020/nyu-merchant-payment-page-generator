@@ -19,9 +19,9 @@ const applyUserInput = (userInput: Record<string, any>, html: string) => {
 
 
 const createHomepageHTML = async (userInput: Record<string, any>, dispatch: Dispatch) => {
-
+  const basePath = process.env.PUBLIC_URL || '';
   try {
-    const response = await fetch('/html_template/homepage.html');
+    const response = await fetch(`${basePath}/html_template/homepage.html`);
     
     if (!response.ok) {
       throw new Error(`Failed to fetch homepage.html: ${response.status} ${response.statusText}`);
