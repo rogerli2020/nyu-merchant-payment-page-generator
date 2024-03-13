@@ -3,6 +3,8 @@ import { Dispatch } from 'redux';
 
 
 const applyUserInput = (userInput: Record<string, any>, html: string) => {
+
+  // 1. handle simple fields that only need string replacement.
   html = html.replace('{{STORE_NAME}}', userInput.storeName);
   html = html.replace('{{STORE_BLURB}}', userInput.storeBlurb);
   html = html.replace('{{REFUND_POLICY}}', userInput.refundPolicy);
@@ -14,6 +16,8 @@ const applyUserInput = (userInput: Record<string, any>, html: string) => {
   html = html.replace('{{EVENT_ADDR_3}}', userInput.eventAddr3);
   html = html.replace('{{EVENT_EMAIL}}', userInput.eventEmail);
   html = html.replace('{{MODIFIERS_SECTION_TITLE}}', userInput.modifiersSectionTitle);
+
+
   return html
 }
 

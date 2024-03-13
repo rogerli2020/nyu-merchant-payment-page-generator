@@ -14,7 +14,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import UploadIcon from '@mui/icons-material/Upload';
 import createHomepageHTML from "../utils/createHomepageHTML";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 enum GenderEnum {
   upay = "Touchnet UPay",
@@ -72,12 +72,23 @@ interface IFormInput {
 }
 
 export default function PageForm() {
-  const dispatch = useDispatch()
-  const { register, handleSubmit } = useForm<IFormInput>()
+  // redux stuff.
+  const dispatch = useDispatch();
+  const inputState = useSelector((state: any) => state.input);
+
+  // react-hook-form submission stuff
+  const { register, setValue, handleSubmit } = useForm<IFormInput>()
   const onSubmit: SubmitHandler<IFormInput> = (data) => 
   {
     createHomepageHTML(data, dispatch)
     console.log(data);
+  }
+
+  // populate fields based on the state of inputState...
+  for (const key in inputState) {
+    if (Object.prototype.hasOwnProperty.call(inputState, key)) {
+      setValue(key as keyof IFormInput, inputState[key as keyof IFormInput]);
+    }
   }
 
 
@@ -86,6 +97,16 @@ export default function PageForm() {
       <Button 
           variant="outlined" 
           component="label"
+          disabled
+      >
+            Use Custom Template
+          <input type="file" accept=".json, .txt" hidden/>
+      </Button>
+      
+      <Button 
+          variant="outlined" 
+          component="label"
+          disabled
       >
           <UploadIcon fontSize='small'/>
           Upload Input Data
@@ -179,6 +200,7 @@ export default function PageForm() {
         multiline
         minRows={2}
         maxRows={20}
+        InputProps={{style: {fontSize: 'small', fontFamily: 'monospace'}}}
         required
       />
 
@@ -192,6 +214,7 @@ export default function PageForm() {
         multiline
         minRows={2}
         maxRows={20}
+        InputProps={{style: {fontSize: 'small', fontFamily: 'monospace'}}}
         required
       />
 
@@ -205,6 +228,7 @@ export default function PageForm() {
         multiline
         minRows={2}
         maxRows={20}
+        InputProps={{style: {fontSize: 'small', fontFamily: 'monospace'}}}
         required
       />
 
@@ -238,6 +262,7 @@ export default function PageForm() {
         multiline
         minRows={2}
         maxRows={20}
+        InputProps={{style: {fontSize: 'small', fontFamily: 'monospace'}}}
       />
 
       {/* Event Address */}
@@ -302,7 +327,8 @@ export default function PageForm() {
         variant="filled"
         multiline
         minRows={4}
-        maxRows={20}
+        maxRows={64}
+        InputProps={{style: {fontSize: 'small', fontFamily: 'monospace'}}}
       />
       <SimpleCollapse choice={1}/>
 
@@ -316,7 +342,8 @@ export default function PageForm() {
         variant="filled"
         multiline
         minRows={4}
-        maxRows={20}
+        maxRows={64}
+        InputProps={{style: {fontSize: 'small', fontFamily: 'monospace'}}}
       />
       <SimpleCollapse choice={2}/>
 
@@ -330,7 +357,8 @@ export default function PageForm() {
         variant="filled"
         multiline
         minRows={4}
-        maxRows={20}
+        maxRows={64}
+        InputProps={{style: {fontSize: 'small', fontFamily: 'monospace'}}}
       />
       <SimpleCollapse choice={3}/>
 
@@ -339,7 +367,7 @@ export default function PageForm() {
         <RefreshIcon fontSize='small'/>
         GENERATE/REFRESH PREVIEW
       </Button>
-      <Button type="submit" variant="contained">
+      <Button type="submit" variant="contained" disabled>
         <DownloadIcon fontSize='small'/>
         GENERATE .ZIP FILE
       </Button>
