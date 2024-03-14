@@ -29,6 +29,8 @@ export default function TemplateEditDialog() {
         Edit Template
       </Button>
       <Dialog
+        fullWidth
+        maxWidth="lg"
         open={open}
         onClose={handleClose}
         PaperProps={{
@@ -41,6 +43,9 @@ export default function TemplateEditDialog() {
             dispatch(setTemplate(templateHTML));
             handleClose();
           },
+        }}
+        style={{
+          "backdropFilter": "blur(10px)"
         }}
       >
         <DialogTitle>Update Template HTML</DialogTitle>
