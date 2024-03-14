@@ -13,6 +13,9 @@ export default function TemplateEditDialog() {
   const dispatch = useDispatch();
   const templateState = useSelector((state: any) => state.template);
 
+  const basePath = process.env.PUBLIC_URL || '';
+  const defaultTemplateURL = `${basePath}/html_template/homepage.html`;
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -51,7 +54,8 @@ export default function TemplateEditDialog() {
         <DialogTitle>Update Template HTML</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Copy and paste your own template's HTML content here, or edit the existing HTML.
+            Copy and paste your own template's HTML content here, or edit the existing HTML.<br/>
+            You can get the default template <a href={defaultTemplateURL}>here</a>.
           </DialogContentText>
           <br/>
           <TextField 
