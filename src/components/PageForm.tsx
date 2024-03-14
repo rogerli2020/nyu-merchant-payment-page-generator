@@ -14,6 +14,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import UploadIcon from '@mui/icons-material/Upload';
 import createHomepageHTML from "../utils/createHomepageHTML";
+import TemplateEditDialog from "./TemplateEditDialog";
 import { useDispatch, useSelector } from "react-redux";
 
 enum GenderEnum {
@@ -75,12 +76,13 @@ export default function PageForm() {
   // redux stuff.
   const dispatch = useDispatch();
   const inputState = useSelector((state: any) => state.input);
+  const templateState = useSelector((state: any) => state.template);
 
   // react-hook-form submission stuff
   const { register, setValue, handleSubmit } = useForm<IFormInput>()
   const onSubmit: SubmitHandler<IFormInput> = (data) => 
   {
-    createHomepageHTML(data, dispatch)
+    createHomepageHTML(templateState, data, dispatch);
     console.log(data);
   }
 
@@ -94,14 +96,7 @@ export default function PageForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "10px", flex: '1', marginRight:'25px' }}>
-      <Button 
-          variant="outlined" 
-          component="label"
-          disabled
-      >
-            Use Custom Template
-          <input type="file" accept=".json, .txt" hidden/>
-      </Button>
+      <TemplateEditDialog/>
       
       <Button 
           variant="outlined" 
