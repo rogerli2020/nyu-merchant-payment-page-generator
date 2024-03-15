@@ -8,22 +8,22 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTemplate } from '../redux/actions/templateActions';
+import { toggleTemplateDialog } from '../redux/actions/templateDialogActions';
 
 export default function TemplateEditDialog() {
   const dispatch = useDispatch();
   const templateState = useSelector((state: any) => state.template);
+  const open = useSelector((state: any) => state.templateDialog);
 
   const basePath = process.env.PUBLIC_URL || '';
   const defaultTemplateURL = `${basePath}/html_template/homepage.html`;
 
-  const [open, setOpen] = React.useState(false);
-
   const handleClickOpen = () => {
-    setOpen(true);
+    dispatch(toggleTemplateDialog());
   };
 
   const handleClose = () => {
-    setOpen(false);
+    dispatch(toggleTemplateDialog());
   };
 
   return (

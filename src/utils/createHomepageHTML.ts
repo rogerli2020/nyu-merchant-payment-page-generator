@@ -2,7 +2,7 @@ import { setPreviewHtml } from '../redux/actions/previewActions';
 import { Dispatch } from 'redux';
 import { IFormInput, ProcessorEnum } from '../components/PageForm';
 
-interface ModifierInputObject {
+interface TextModifierInputObject {
   FIELD_TYPE: string;
   FIELD_ID: string;
   FIELD_NAME: string;
@@ -10,6 +10,16 @@ interface ModifierInputObject {
   MAX_LENGTH: number;
   PLACEHOLDER: string;
 }
+
+interface DropdownModifierInputObject {
+  FIELD_TYPE: string;
+  FIELD_ID: string;
+  FIELD_NAME: string;
+  IS_REQUIRED: boolean;
+  OPTIONS: string[];
+}
+
+type ParsedInputArray = (TextModifierInputObject | DropdownModifierInputObject)[];
 
 const paymentProcessorFieldIDs: Record<string, any> = {
   //key                 PGW Field ID            UPay Field ID
@@ -41,43 +51,71 @@ const paymentProcessorFieldIDs: Record<string, any> = {
 
 // this object is not very readable.
 const HTMLTemplates = {
-textModifierTemplate: `						<label for="sectionHeader"><b>{{IS_REQUIRED}} {{FIELD_NAME}}:</b><br /></label>
-<input type="text" name="{{FIELD_ID}}" id="{{FIELD_ID}}" placeholder="{{PLACEHOLDER}}"><br/>
+textModifierTemplate: `						<label for="sectionHeader"><b>{{IS_REQUIRED_STAR}} {{FIELD_NAME}}:</b><br /></label>
+<input type="text" name="{{FIELD_ID}}" id="{{FIELD_ID}}" placeholder="{{PLACEHOLDER}}" {{IS_REQUIRED}}><br/>
 `,
-dropdownModifierTemplate: `                          <select name="{{FIELD_ID}}" id="{{FIELD_ID}}">
-<option value="empty" selected="selected">Select option</option>	
-{{DROPDOWN_OPTIONS}}
+dropdownModifierTemplate: `						<label for="sectionHeader"><b>{{FIELD_NAME}}:</b></label>
+<select name="{{FIELD_NAME}}" id="{{FIELD_ID}}">
+   {{DROPDOWN_OPTIONS}}
 </select>
 `,
 dropdownModifierOptionTemplate: `                             <option value="{{OPTION_ID}}">{{OPTION_NAME}}</option>
 `,
 cybersourceFormTagTemplate:`		<form action="https://epaygate.nyu.edu/paygateapp/controller?PG_MODE=PG_WEB" method="post" id="cb_web_form" name="cb_web_form" >
 `,
-uPayFormTagTemplate:`		<formaction="https://secure.touchnet.com/C21125_upay/web/index.jsp" method="post" name="web_form" id="web_form" >
+uPayFormTagTemplate:`		<form action="https://secure.touchnet.com/C21125_upay/web/index.jsp" method="post" name="web_form" id="web_form" >
 `,
 }
 
-function parseModifiersInput(input: string): ModifierInputObject[] {
+
+function parseModifiersInput(input: string): ParsedInputArray {
   const lines = input.trim().split('\n');
-  const parsedInput: ModifierInputObject[] = [];
+  const parsedInput: ParsedInputArray = [];
+
   lines.forEach(line => {
-      const [FIELD_TYPE, FIELD_ID, FIELD_NAME, IS_REQUIRED, MAX_LENGTH, PLACEHOLDER] = line.trim().split(',').map(field => field.trim());
-      parsedInput.push({
-          FIELD_TYPE,
-          FIELD_ID,
-          FIELD_NAME,
-          IS_REQUIRED: IS_REQUIRED === 'true',
-          MAX_LENGTH: parseInt(MAX_LENGTH, 10),
-          PLACEHOLDER
-      });
+      const [FIELD_TYPE, FIELD_ID, FIELD_NAME, IS_REQUIRED, ...options] = line.trim().split(',').map(field => field.trim());
+
+      if (FIELD_TYPE === 'text') {
+          parsedInput.push({
+              FIELD_TYPE,
+              FIELD_ID,
+              FIELD_NAME,
+              IS_REQUIRED: IS_REQUIRED === 'true',
+              MAX_LENGTH: parseInt(options[0], 10),
+              PLACEHOLDER: options[1]
+          });
+      } else if (FIELD_TYPE === 'dropdown') {
+          parsedInput.push({
+              FIELD_TYPE,
+              FIELD_ID,
+              FIELD_NAME,
+              IS_REQUIRED: IS_REQUIRED === 'true',
+              OPTIONS: options
+          });
+      }
   });
+
+  console.log(parsedInput);
   return parsedInput;
 }
+
+
+const replacePlaceholders = (template: string, obj: any, ignoreFields: string[] = []): string =>
+    template.replace(/{{(.*?)}}/g, (match, p1) => {
+        const fieldName = p1.trim();
+        if (ignoreFields.includes(fieldName)) {
+            return match; // Return the original placeholder if it's in the ignore list
+        }
+        return obj[fieldName];
+    }
+  );
+
 
 const applyUserInput = (userInput: IFormInput, html: string) => {
 
   // determine payment processor
   const currProcessor: ProcessorEnum = userInput.paymentProcessor
+
 
   // handle simple fields that only need string replacement.
   html = html.replace('{{STORE_NAME}}', userInput.storeName);
@@ -94,17 +132,60 @@ const applyUserInput = (userInput: IFormInput, html: string) => {
   html = html.replace('{{MODIFIERS_SECTION_TITLE}}', userInput.modifiersSectionTitle);
   html = html.replace('{{TERMS_OF_SERVICE}}', userInput.termsOfService);
 
+
   // handle form tag
   if (currProcessor == ProcessorEnum.upay)         
     html = html.replace('{{FORM_TAG}}', HTMLTemplates.uPayFormTagTemplate);
   if (currProcessor == ProcessorEnum.cybersource)  
     html = html.replace('{{FORM_TAG}}', HTMLTemplates.cybersourceFormTagTemplate);
 
+
   // handle chartfield information
 
 
   // handle modifiers section
-  let parsedModifiers = parseModifiersInput(userInput.modifiers);
+  let modifiersSectionRawHTML: string = "";
+  let parsedModifiers: ParsedInputArray = parseModifiersInput(userInput.modifiers);
+  for (let i = 0; i < parsedModifiers.length; i++) {
+    let modifierInput: (TextModifierInputObject | DropdownModifierInputObject) = parsedModifiers[i];
+    let currentModifierRawHTML: string;
+    switch (modifierInput.FIELD_TYPE)
+    {
+      case 'text':
+        modifierInput = modifierInput as TextModifierInputObject;
+        currentModifierRawHTML = HTMLTemplates.textModifierTemplate;
+        currentModifierRawHTML = replacePlaceholders(currentModifierRawHTML, modifierInput, ['IS_REQUIRED', 'IS_REQUIRED_STAR']);
+        currentModifierRawHTML = currentModifierRawHTML.replace('{{IS_REQUIRED_STAR}}', modifierInput.IS_REQUIRED ? '*' : '');
+        currentModifierRawHTML = currentModifierRawHTML.replace('{{IS_REQUIRED}}', modifierInput.IS_REQUIRED ? 'required' : '');
+        modifiersSectionRawHTML = modifiersSectionRawHTML.concat(currentModifierRawHTML);
+        break;
+      case 'dropdown':
+        modifierInput = modifierInput as DropdownModifierInputObject;
+        currentModifierRawHTML = HTMLTemplates.dropdownModifierTemplate;
+        let allDropdownOptionsHTML: string = '';
+        for (let j = 0; j + 1 < modifierInput.OPTIONS.length; j+=2) {
+          let currDropdownOptionHTML = HTMLTemplates.dropdownModifierOptionTemplate;
+          currDropdownOptionHTML = replacePlaceholders(
+              currDropdownOptionHTML,
+              {
+                OPTION_ID: modifierInput.OPTIONS[j],
+                OPTION_NAME: modifierInput.OPTIONS[j+1],
+              }
+            )
+          allDropdownOptionsHTML = allDropdownOptionsHTML.concat(currDropdownOptionHTML);
+        }
+        currentModifierRawHTML = replacePlaceholders(
+          currentModifierRawHTML, 
+          {...modifierInput, DROPDOWN_OPTIONS: allDropdownOptionsHTML},
+        );
+        console.log(currentModifierRawHTML);
+        modifiersSectionRawHTML = modifiersSectionRawHTML.concat(currentModifierRawHTML);
+        break;
+      default:
+        break;
+    }
+  }
+  html = html.replace('{{MODIFIERS_SECTION}}', modifiersSectionRawHTML);
 
   // handle product sections
 

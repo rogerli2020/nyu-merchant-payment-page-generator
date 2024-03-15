@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import EmailIcon from '@mui/icons-material/Email';
+import SideBarButton from './SideBarButton';
 
 export default function ButtonAppBar() {
   const [scrollOpacity, setScrollOpacity] = useState(0);
@@ -41,7 +42,7 @@ export default function ButtonAppBar() {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <SideBarButton />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, opacity: scrollOpacity, color: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, ${scrollOpacity}))` }}>
             PAYMENT PAGE MAKER
