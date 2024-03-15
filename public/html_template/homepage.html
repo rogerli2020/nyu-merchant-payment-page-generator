@@ -164,13 +164,14 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
         <div id="formContainer">
             <div class="text section">
                 <div class="fullSize">
-                    <form name="TransactionFormAD" action="https://epaygate.nyu.edu/paygateapp/controller?PG_MODE=PG_WEB" method="post" id="TransactionFormAD">
+                    <!-- <form name="TransactionFormAD" action="{{POST_URL}}" method="post" id="TransactionFormAD"> -->
+                    {{FORM_TAG}}
 
                         <!-- REQUIRED FIELD...  Make sure you enter YOUR form_id -->
-                        <input type="hidden" name="FORM_ID" id="FORM_ID" value="4885" />
+                        <input type="hidden" name="{{FORM_ID}}" id="{{FORM_ID}}" value="4885" />
 
-                        <input type="hidden" name="FORM_SUCCESS_URL" value="https://dev.pages.nyu.edu/fsm/QAtesting/success.html" />
-                        <input type="hidden" name="FORM_FAILURE_URL" value="https://dev.pages.nyu.edu/fsm/QAtesting/failure.html" />
+                        <input type="hidden" name="{{FORM_SUCCESS_URL}}" value="https://dev.pages.nyu.edu/fsm/QAtesting/success.html" />
+                        <input type="hidden" name="{{FORM_FAILURE_URL}}" value="https://dev.pages.nyu.edu/fsm/QAtesting/failure.html" />
 
 
                         <!-- Make sure to turn off the Test Flag before making this page live! Review the information about toggling between Test and Production modes at http://www.nyu.edu/epayments/secure/create-a-payment-page.html -->
@@ -371,30 +372,30 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 						
 						
 						<!--<label for="AMOUNT_EVT_1">Summary VAT Only (AMOUNT_EVT_1, Field will be HIDDEN on final Approval) AMOUNT_EVT_1 in future</label>-->
-                        <input type="hidden" name="AMOUNT_EVT_1" id="AMOUNT_EVT_1" VALUE="0" readonly>
-                        <input type="hidden" name="ACCOUNT_EVT_1" id="ACCOUNT_EVT_1" value="22080" readonly>
-                        <input type="hidden" name="FUND_CODE_EVT_1" id="FUND_CODE_EVT_1"  value="10" readonly>
-                        <input type="hidden" name="DEPTID_EVT_1" id="DEPTID_EVT_1" value="00001" readonly>
-                        <input type="hidden" name="PROGRAM_CODE_EVT_1" id="PROGRAM_CODE_EVT_1" value="WSQPG" readonly>
-                        <input type="hidden" name="PROJECT_ID_EVT_1" id="PROJECT_ID_EVT_1" value="WSQPJ" readonly> 
+                        <input type="hidden" name="{{AMOUNT_EVT_1}}" id="{{AMOUNT_EVT_1}}" VALUE="0" readonly>
+                        <input type="hidden" name="{{ACCOUNT_EVT_1}}" id="{{ACCOUNT_EVT_1}}" value="22080" readonly>
+                        <input type="hidden" name="{{FUND_CODE_EVT_1}}" id="{{FUND_CODE_EVT_1}}"  value="10" readonly>
+                        <input type="hidden" name="{{DEPTID_EVT_1}}" id="{{DEPTID_EVT_1}}" value="00001" readonly>
+                        <input type="hidden" name="{{PROGRAM_CODE_EVT_1}}" id="{{PROGRAM_CODE_EVT_1}}" value="WSQPG" readonly>
+                        <input type="hidden" name="{{PROJECT_ID_EVT_1}}" id="{{PROJECT_ID_EVT_1}}" value="WSQPJ" readonly> 
 
 						
 						<!-- <label for="AMOUNT_EVT_2">Summary of Gift Only (Field will be HIDDEN on final Approval) would be AMOUNT_EVT_2 in future</label> -->
-                        <input type="hidden" name="AMOUNT_EVT_2" id="AMOUNT_EVT_2" VALUE="0" readonly>
-                        <input type="hidden" name="ACCOUNT_EVT_2" id ="ACCOUNT_EVT_2" value="23103" readonly>
-                        <input type="hidden" name="FUND_CODE_EVT_2" id="FUND_CODE_EVT_2" value="10" readonly>
-                        <input type="hidden" name="DEPTID_EVT_2" id="DEPTID_EVT_2" value="00001" readonly>
-                        <input type="hidden" name="PROGRAM_CODE_EVT_2" id="PROGRAM_CODE_EVT_2" value="WSQPG" readonly>
-                        <input type="hidden" name="PROJECT_ID_EVT_2" id="PROJECT_ID_EVT_2" value="WSQPJ" readonly>
+                        <input type="hidden" name="{{AMOUNT_EVT_2}}" id="{{AMOUNT_EVT_2}}" VALUE="0" readonly>
+                        <input type="hidden" name="{{ACCOUNT_EVT_2}}" id ="{{ACCOUNT_EVT_2}}" value="23103" readonly>
+                        <input type="hidden" name="{{FUND_CODE_EVT_2}}" id="{{FUND_CODE_EVT_2}}" value="10" readonly>
+                        <input type="hidden" name="{{DEPTID_EVT_2}}" id="{{DEPTID_EVT_2}}" value="00001" readonly>
+                        <input type="hidden" name="{{PROGRAM_CODE_EVT_2}}" id="{{PROGRAM_CODE_EVT_2}}" value="WSQPG" readonly>
+                        <input type="hidden" name="{{PROJECT_ID_EVT_2}}" id="{{PROJECT_ID_EVT_2}}" value="WSQPJ" readonly>
 						
 
 						
-					    <label for="AMOUNT_PAID"><strong>Registration fee and 5% VAT tax total.</strong></label>
+					    <label for="{{AMOUNT_PAID}}"><strong>Registration fee and 5% VAT tax total.</strong></label>
 						<!-- -->
 						
 						<!--<label for="sectionHeader">Total Amount in USD Currency (AMOUNT_PAID field. This field will be HIDDEN on final approval)</label> -->
 						<!-- type should be Hidden-->
-						<input type="number" name="AMOUNT_PAID" id="AMOUNT_PAID" value="0" readonly >
+						<input type="number" name="{{AMOUNT_PAID}}" id="{{AMOUNT_PAID}}" value="0" readonly >
                         <!-- Some javascript to populate AMOUNT_PAID -->
 						
 						
@@ -405,26 +406,27 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 
 
-                       <label for="FIRST_NAME"><b>* Cardholder's First Name</b><br />
+                       <label for="{{FIRST_NAME}}"><b>* Cardholder's First Name</b><br />
 						   <i class="h6_nyu">Please enter the credit card holder's first name as it appears on the card.</i></label>
-                        <input type="text" name="FIRST_NAME" id="FIRST_NAME" size="12" value="" autocomplete="on"/>
+                        <input type="text" name="{{FIRST_NAME}}" id="{{FIRST_NAME}}" size="12" value="" autocomplete="on"/>
                         
+                        {{BILL_LAST_NAME_FIELD}}
 						<label for="LAST_NAME"><b>* Cardholder's Last Name</b><br />
 							<i class="h6_nyu">Please enter the credit card holder's last name as it appears on the card.</i></label>
 
                         <input type="text" name="LAST_NAME" id="LAST_NAME" size="16" value="" autocomplete="on"/>
 						
-                        <label for="ADDRESS_LINE_1"><br />
+                        <label for="{{ADDRESS_LINE_1}}"><br />
                             <b>* Cardholder's Street Address</b><br />
                             <i class="h6_nyu">Please enter the credit card billing address.</i></label>
-                        <input type="text" name="ADDRESS_LINE_1" id="ADDRESS_LINE_1" size="50" value="" autocomplete="on" />
+                        <input type="text" name="{{ADDRESS_LINE_1}}" id="{{ADDRESS_LINE_1}}" size="50" value="" autocomplete="on" />
 
-                        <label for="CITY"><br /><b>* City/Province</b></label>
-                        <input type="text" name="CITY" id="CITY" size="16" value="" autocomplete="on"/>
+                        <label for="{{CITY}}"><br /><b>* City/Province</b></label>
+                        <input type="text" name="{{CITY}}" id="{{CITY}}" size="16" value="" autocomplete="on"/>
 
-                        <label for="STATE"><br /><b>* State</b></label>
+                        <label for="{{STATE}}"><br /><b>* State</b></label>
 
-                        <select name="STATE" id="STATE" autocomplete="on">
+                        <select name="{{STATE}}" id="{{STATE}}" autocomplete="on">
                             <option value="NA" selected="selected"> Non-US</option>
 
                             <option value="" style="font-weight: bold;"> </option>
@@ -513,11 +515,11 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
                             <option value="WY">Wyoming</option>
                         </select>
 <br />
-                        <label for="POSTAL_CODE"> <b>* Postal Code</b></label>
-                        <input type="text" name="POSTAL_CODE" id="POSTAL_CODE" size="10" value="" placeholder="00000-0000" autocomplete="on"/>
+                        <label for="{{POSTAL_CODE}}"> <b>* Postal Code</b></label>
+                        <input type="text" name="{{POSTAL_CODE}}" id="{{POSTAL_CODE}}" size="10" value="" placeholder="00000-0000" autocomplete="on"/>
 <br />
-                        <label for="COUNTRY"><b>* Country</b></label>
-                        <select name="COUNTRY" id="COUNTRY" autocomplete="on">
+                        <label for="{{COUNTRY}}"><b>* Country</b></label>
+                        <select name="{{COUNTRY}}" id="{{COUNTRY}}" autocomplete="on">
                             <option value="us">United States</option>
                             <option value="af">Afghanistan</option>
                             <option value="al">Albania</option>
@@ -823,9 +825,8 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
   <h3>Event Information</h3>
         <br/>
 		<!-- -->
-        <a href="">
-        {{EVENT_IMG}}
-        <!-- <img src="" alt="LOGO" width="auto" height="130"> -->
+        <a href="{{EVENT_URL}}">
+        <img src="{{EVENT_IMG}}" alt="LOGO" width="auto" height="130">
         </a>
         
 
@@ -881,7 +882,7 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
 
       //  verify that a positive numeric amount has been entered
-       var amount = document.getElementById('AMOUNT_PAID').value;
+       var amount = document.getElementById('{{AMOUNT_PAID}}').value;
        var amountValue = parseFloat(amount);
 
        if ( isNaN(amountValue) || amountValue < 0) {
@@ -916,15 +917,15 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
             errorString = errorString + "Billing First and Last names are required\n";
         }
 
-        if (document.getElementById('ADDRESS_LINE_1').value.length < 1) {
+        if (document.getElementById('{{ADDRESS_LINE_1}}').value.length < 1) {
             errorString = errorString + "Billing Street Address is required\n";
         }
 
-        if (document.getElementById('CITY').value.length < 1) {
+        if (document.getElementById('{{CITY}}').value.length < 1) {
             errorString = errorString + "Billing City is required\n";
         }
 
-        var stateMenu = document.getElementById('STATE');
+        var stateMenu = document.getElementById('{{STATE}}');
         var s = stateMenu.selectedIndex;
         var state = stateMenu.options[s].value;
 
@@ -937,7 +938,7 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	//	} 
 	
 
-        var countryMenu = document.getElementById('COUNTRY');
+        var countryMenu = document.getElementById('{{COUNTRY}}');
         var c = countryMenu.selectedIndex;
         var country = countryMenu.options[c].value;
 
@@ -1014,9 +1015,9 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
   document.getElementById("TRAN_EVT_15").value = totalValue15.toFixed(2);	// line1 Subtota4
   document.getElementById("TRAN_EVT_16").value = totalValue9.toFixed(2);	// GL Entry Line1 - Only way to show in report
   document.getElementById("TRAN_EVT_17").value = totalValue8.toFixed(2);	// GL Entry Line2 - Only way to show in report
-  document.getElementById("AMOUNT_EVT_1").value = totalValue9.toFixed(2);   // REVENUE LINE TOTAL
-  document.getElementById("AMOUNT_EVT_2").value = totalValue8.toFixed(2);   // VAT LINE TOTAL 
-  document.getElementById("AMOUNT_PAID").value = totalValue1.toFixed(2);	// Total			
+  document.getElementById("{{AMOUNT_EVT_1}}").value = totalValue9.toFixed(2);   // REVENUE LINE TOTAL
+  document.getElementById("{{AMOUNT_EVT_2}}").value = totalValue8.toFixed(2);   // VAT LINE TOTAL 
+  document.getElementById("{{AMOUNT_PAID}}").value = totalValue1.toFixed(2);	// Total			
 }
 
 
@@ -1038,9 +1039,9 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 		var nongift10 = document.getElementById("TRAN_EVT_10");
 		var nongift10b = document.getElementById("TRAN_EVT_10b");
 		var nongift11 = document.getElementById("TRAN_EVT_11");
-		var nongift12 = document.getElementById("AMOUNT_EVT_1");// REVENUE
-		var nongift13 = document.getElementById("AMOUNT_EVT_2");// VAT		
-        var total    = document.getElementById("AMOUNT_PAID");
+		var nongift12 = document.getElementById("{{AMOUNT_EVT_1}}");// REVENUE
+		var nongift13 = document.getElementById("{{AMOUNT_EVT_2}}");// VAT		
+        var total    = document.getElementById("{{AMOUNT_PAID}}");
 
            nongift1.onfocus = calculatePaymentTotal;
            nongift1.onblur = calculatePaymentTotal;
@@ -1096,11 +1097,11 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 		var nongift9 = document.getElementById("TRAN_EVT_9").value.replace(',', '');
 		var nongift10 = document.getElementById("TRAN_EVT_10").value.replace(',', '');	
 		var nongift10b = document.getElementById("TRAN_EVT_10b").value.replace(',', '');
-		var nongift12 = document.getElementById("AMOUNT_EVT_1").value.replace(',', '');	//revenue
-		var nongift13 = document.getElementById("AMOUNT_EVT_2").value.replace(',', ''); //vat			
+		var nongift12 = document.getElementById("{{AMOUNT_EVT_1}}").value.replace(',', '');	//revenue
+		var nongift13 = document.getElementById("{{AMOUNT_EVT_2}}").value.replace(',', ''); //vat			
         /* end sh37
 		0 added */
-        document.getElementById("AMOUNT_PAID").value = (getIntValue(nongift12) + getIntValue(nongift13));
+        document.getElementById("{{AMOUNT_PAID}}").value = (getIntValue(nongift12) + getIntValue(nongift13));
 		
 		
         /* end sh370 added */
@@ -1171,7 +1172,7 @@ async function someFunc() {
             getTRAN_EVT_4();                                                                 // whatever this does.
             calculatePaymentTotal();                                                         // update total amount.
             console.log(`Value (no tax) before discount shall be ${oldValue} and new value shall be ${newValue}`);
-            console.log(`Final amount to be paid after discount: ${document.getElementById("AMOUNT_PAID").value}`)
+            console.log(`Final amount to be paid after discount: ${document.getElementById("{{AMOUNT_PAID}}").value}`)
             alert('Valid Promo Code! ' + discount.toString() + '% discount has been applied.');
             return true;
         } else {
@@ -1187,7 +1188,7 @@ async function someFunc() {
   document.getElementById('regEMAIL').defaultValue = "none_provided@nyu.edu";
 	}
 	function myFunction2() {
-  document.getElementById('POSTAL_CODE').defaultValue = "00000-0000";
+  document.getElementById('{{POSTAL_CODE}}').defaultValue = "00000-0000";
 	}
 	function myFunction3() {
   document.getElementById('zreg_fname').defaultValue = "empty";

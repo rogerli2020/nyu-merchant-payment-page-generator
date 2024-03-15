@@ -1,12 +1,14 @@
 import './App.css';
 import MainComponent from './components/MainComponent';
 import initializeTemplateState from './utils/intializeTemplateState';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 function App() {
 
   const dispatch = useDispatch();
-  initializeTemplateState(dispatch);
+  const templateState = useSelector((state: any) => state.template);
+
+  if (!templateState) initializeTemplateState(dispatch);
   
   return (
     <MainComponent/>

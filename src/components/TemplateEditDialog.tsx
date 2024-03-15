@@ -54,7 +54,7 @@ export default function TemplateEditDialog() {
         <DialogTitle>Update Template HTML</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Copy and paste your own template's HTML content here, or edit the existing HTML.<br/>
+            Copy and paste your own template's HTML content here, or edit the default HTML.<br/>
             You can get the default template <a href={defaultTemplateURL}>here</a>.
           </DialogContentText>
           <br/>

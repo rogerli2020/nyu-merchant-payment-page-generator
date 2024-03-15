@@ -17,7 +17,7 @@ import createHomepageHTML from "../utils/createHomepageHTML";
 import TemplateEditDialog from "./TemplateEditDialog";
 import { useDispatch, useSelector } from "react-redux";
 
-enum GenderEnum {
+export enum ProcessorEnum {
   upay = "Touchnet UPay",
   cybersource = "Cybersource"
 }
@@ -36,9 +36,9 @@ enum SchoolEnum {
   tisch = "Tisch",
 }
 
-interface IFormInput {
+export interface IFormInput {
   // Payment Processor Fields
-  paymentProcessor: GenderEnum
+  paymentProcessor: ProcessorEnum
   storeID: number
   chartfield1: string
   chartfield2: string
@@ -52,6 +52,7 @@ interface IFormInput {
 
   // Event/Organzation Information Fields
   eventName: string
+  eventURL: string
   eventImageURL: string
   eventDescription: string
   eventAddr1: string
@@ -107,6 +108,7 @@ export default function PageForm() {
           Upload Input Data
           <input type="file" accept=".json, .txt" hidden/>
       </Button>
+      
       <FormHelperText style={{marginLeft:'10px'}}>
           If applicable, you can upload a text file containing the input data, and the application will 
           automatically parse your data and populate the fields.
@@ -139,7 +141,7 @@ export default function PageForm() {
         label="Chartfield 1"
         defaultValue=""
         variant="filled"
-        helperText="For 'AMOUNT_EVT_1'. Format: AA-BBBB-CCCCCC-DDDDD-EEEEEE"
+        helperText="..."
         required
       />
 
@@ -148,7 +150,7 @@ export default function PageForm() {
         label="Chartfield 2"
         defaultValue=""
         variant="filled"
-        helperText="For 'AMOUNT_EVT_2'. Format: AA-BBBB-CCCCCC-DDDDD-EEEEEE"
+        helperText="..."
         required
       />
 
@@ -165,10 +167,10 @@ export default function PageForm() {
       {/* School Selection */}
       <Select 
         {...register("schoolSelection")}
-        required
+        disabled
         defaultValue={"placeholder"}
       >
-        <MenuItem disabled value="placeholder">Select School</MenuItem>
+        <MenuItem disabled value="placeholder">Select School (IGNORE THIS FIELD)</MenuItem>
         <MenuItem value="nyu">NYU</MenuItem>
         <MenuItem value="nyuad">NYU Abu Dhabi</MenuItem>
         <MenuItem value="nyush">NYU Shanghai</MenuItem>
@@ -203,7 +205,6 @@ export default function PageForm() {
       <TextField 
         {...register("refundPolicy")}
         label="Refund Policy HTML"
-        defaultValue=""
         helperText="Enter the raw HTML of a message detailing the refund policies of the store."
         variant="filled"
         multiline
@@ -236,6 +237,15 @@ export default function PageForm() {
         helperText="The name of the event or organization"
         variant="filled"
         required
+      />
+
+      {/* Event Name */}
+      <TextField 
+        {...register("eventURL")}
+        label="Event/Organization URL"
+        defaultValue=""
+        helperText="The URL link to the event/organization, if it has one"
+        variant="filled"
       />
 
       {/* Event Name */}

@@ -19,7 +19,7 @@ const guide1 = (
           Enter the information of a modifier in comma separated format as specified below.
         </li>
         <li>
-          If the field is a text input field, use this format: <strong>text,[MODIFIER FIELD ID],[MODIFIER FIELD NAME],[REQUIRED],[STRING LENGTH LIMIT]</strong>
+          If the field is a text input field, use this format: <strong>text,[MODIFIER FIELD ID],[MODIFIER FIELD NAME],[REQUIRED],[STRING LENGTH LIMIT],[PLACEHOLDER]</strong>
         </li>
         <li>
           If the field is a dropdown field, use this format: <strong>dropdown,[MODIFIER FIELD ID],[MODIFIER FIELD NAME],[REQUIRED],[OPTION1 VALUE],[OPTION1 NAME],[OPTION2 VALUE],[OPTION2 NAME]...</strong>
@@ -31,11 +31,11 @@ const guide1 = (
           Example input:<br/>
           <div className="github-code">
             <code>
-              text,REGISTRANT_FULL_NAME,Registrant Full Name,true,50<br/>
+              text,REGISTRANT_FULL_NAME,Registrant Full Name,true,50,Andy Hamilton<br/>
               dropdown,REGISTRANT_TYPE,Registrant Type,false,UNDERGRAD_STU,Undergraduate,GRAD_STU,Graduate Student,PROF,Professor
             </code><br/>
           </div>
-          This example input generates 2 modifier fields: a required Registrant Full Name field with maximum 50 characters, and an optional Registrant Type field with 3 options: Undergraduate, Graduate Student, and Professor.
+          This example input generates 2 modifier fields: a required Registrant Full Name field with maximum 50 characters, with the placeholder being "Andrew Hamilton", and an optional Registrant Type field with 3 options: Undergraduate, Graduate Student, and Professor.
         </li>
       </ol>
     </Typography>

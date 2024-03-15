@@ -19,8 +19,8 @@ function MainComponent() {
                 }}>
 
                 {/* Headline */}
-                <Box>
-                    <Typography variant="h3" fontWeight={'bold'}>PAYMENT PAGE GENERATOR</Typography>
+                <Box style={{marginTop: '125px'}}>
+                    <Typography variant="h3" fontWeight={'bold'}>Payment Page Maker</Typography>
                     <Typography>
                         This application generates payment page HTMLs for NYU Merchants using Touchnet UPay or NYU PGW.
                     </Typography>
