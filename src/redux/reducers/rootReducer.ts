@@ -5,12 +5,14 @@ import previewReducer from './previewReducer'; // Adjust the path based on your 
 import inputReducer from './inputReducer';
 import templateReducer from './templateReducer';
 import templateDialogReducer from './templateDialogReducer';
+import inputInfoDialogReducer from './inputInfoDialogReducer';
 
 const rootReducer = combineReducers({
   preview: previewReducer,
   input: inputReducer,
   template: templateReducer,
   templateDialog: templateDialogReducer,
+  inputInfoDialog: inputInfoDialogReducer,
 });
 
 export default rootReducer;

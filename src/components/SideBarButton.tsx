@@ -9,8 +9,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import GitHub from '@mui/icons-material/GitHub';
 import EditIcon from '@mui/icons-material/Edit';
-import UploadIcon from '@mui/icons-material/Upload';
+import ImportExportIcon from '@mui/icons-material/ImportExport';
 import { toggleTemplateDialog } from '../redux/actions/templateDialogActions';
+import { toggleInputInfoDialog } from '../redux/actions/inputInfoDialogActions';
 import { useDispatch } from 'react-redux';
 
 type Anchor = 'left';
@@ -40,12 +41,13 @@ export default function SideBarButton() {
   const iconList = [
     <GitHub/>,
     <EditIcon/>,
-    <UploadIcon/>,
+    <ImportExportIcon/>,
   ]
 
   const onClickFuncList = [
     () => { window.open('https://github.com/rogerli2020/nyu-merchant-payment-page-generator/', '_blank'); },
-    () => { dispatch(toggleTemplateDialog()); }
+    () => { dispatch(toggleTemplateDialog()); },
+    () => { dispatch(toggleInputInfoDialog()); },
   ]
 
   const list = (anchor: Anchor) => (
@@ -56,7 +58,7 @@ export default function SideBarButton() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['GitHub', 'Edit Template', 'Upload Input Data',].map((text, index) => (
+        {['GitHub', 'Edit Template', 'Import Input Data',].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton onClick={onClickFuncList[index]}>
               <ListItemIcon>

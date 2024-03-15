@@ -15,6 +15,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import UploadIcon from '@mui/icons-material/Upload';
 import createHomepageHTML from "../utils/createHomepageHTML";
 import TemplateEditDialog from "./TemplateEditDialog";
+import InputInfoDialog from "./InputInfoDialog";
 import { useDispatch, useSelector } from "react-redux";
 
 export enum ProcessorEnum {
@@ -98,19 +99,10 @@ export default function PageForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "10px", flex: '1', marginRight:'25px' }}>
       <TemplateEditDialog/>
-      
-      <Button 
-          variant="outlined" 
-          component="label"
-          disabled
-      >
-          <UploadIcon fontSize='small'/>
-          Upload Input Data
-          <input type="file" accept=".json, .txt" hidden/>
-      </Button>
+      <InputInfoDialog/>
       
       <FormHelperText style={{marginLeft:'10px'}}>
-          If applicable, you can upload a text file containing the input data, and the application will 
+          If applicable, you can import a text file containing the input data, and the application will 
           automatically parse your data and populate the fields.
       </FormHelperText>
 

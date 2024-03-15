@@ -7,31 +7,39 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTemplate } from '../redux/actions/templateActions';
-import { toggleTemplateDialog } from '../redux/actions/templateDialogActions';
-import EditIcon from '@mui/icons-material/Edit';
+import { setInputFields } from '../redux/actions/inputActions';
+import { toggleInputInfoDialog } from '../redux/actions/inputInfoDialogActions';
+import ImportExportIcon from '@mui/icons-material/ImportExport';
 
-export default function TemplateEditDialog() {
+export default function InputInfoDialog() {
   const dispatch = useDispatch();
-  const templateState = useSelector((state: any) => state.template);
-  const open = useSelector((state: any) => state.templateDialog);
-
-  const basePath = process.env.PUBLIC_URL || '';
-  const defaultTemplateURL = `${basePath}/html_template/homepage.html`;
+  const inputState = useSelector((state: any) => state.input);
+  const inputStateString = JSON.stringify(inputState, null, 2);
+  const open = useSelector((state: any) => state.inputInfoDialog);
 
   const handleClickOpen = () => {
-    dispatch(toggleTemplateDialog());
+    dispatch(toggleInputInfoDialog());
   };
 
   const handleClose = () => {
-    dispatch(toggleTemplateDialog());
+    dispatch(toggleInputInfoDialog());
   };
+
+  const isValidJson = (jsonString: string) => {
+    try {
+        JSON.parse(jsonString);
+        return true;
+    } catch (error) {
+        alert("Could not parse your input. Make sure it's in a correct JSON format.")
+        return false;
+    }
+}
 
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
-        <EditIcon fontSize='small' style={{marginRight: '5px'}}/>
-        Edit Template
+        <ImportExportIcon fontSize='small' style={{marginRight: '5px'}}/>
+        Import Input Data
       </Button>
       <Dialog
         fullWidth
@@ -44,28 +52,34 @@ export default function TemplateEditDialog() {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries((formData as any).entries());
-            const templateHTML = formJson.templateHTML;
-            dispatch(setTemplate(templateHTML));
-            handleClose();
+            let newInputData = formJson.input_data;
+            if (newInputData.length == 0) newInputData = '{}';
+            if (isValidJson(newInputData))
+            {
+              dispatch(setInputFields(JSON.parse(newInputData)));
+              handleClose();
+            }
           },
         }}
         style={{
           "backdropFilter": "blur(10px)"
         }}
       >
-        <DialogTitle>Update Template HTML</DialogTitle>
+        <DialogTitle>Import Input Data</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Copy and paste your own template's HTML content here, or edit the default HTML.<br/>
-            You can get the default template <a href={defaultTemplateURL} target="_blank">here</a>.
+            <p>Copy and paste your own input data in the area below, or edit the current input data.</p>
+            <p>An input data file, called <b>input_data.txt</b>, will be automatically generated for you whenever you generate a
+            .zip file. You can simply copy and paste its content below if you intend to make modifications to it.</p>
+            <p>Make sure your input is in JSON format.</p>
           </DialogContentText>
           <br/>
           <TextField 
-            label="Template HTML"
-            defaultValue={templateState}
+            label="Input Data"
+            defaultValue={inputStateString}
             variant="filled"
             multiline
-            name="templateHTML"
+            name="input_data"
             minRows={50}
             maxRows={16384}
             fullWidth
