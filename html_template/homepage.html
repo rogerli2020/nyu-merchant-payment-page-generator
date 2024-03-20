@@ -168,10 +168,10 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
                     {{FORM_TAG}}
 
                         <!-- REQUIRED FIELD...  Make sure you enter YOUR form_id -->
-                        <input type="hidden" name="{{FORM_ID}}" id="{{FORM_ID}}" value="4885" />
+                        <input type="hidden" name="{{FORM_ID}}" id="{{FORM_ID}}" value="{{FORM_ID_VALUE}}" />
 
-                        <input type="hidden" name="{{FORM_SUCCESS_URL}}" value="https://dev.pages.nyu.edu/fsm/QAtesting/success.html" />
-                        <input type="hidden" name="{{FORM_FAILURE_URL}}" value="https://dev.pages.nyu.edu/fsm/QAtesting/failure.html" />
+                        <input type="hidden" name="{{FORM_SUCCESS_URL}}" value="{{FORM_SUCCESS_URL_VALUE}}" />
+                        <input type="hidden" name="{{FORM_FAILURE_URL}}" value="{{FORM_FAILURE_URL}}" />
 
 
                         <!-- Make sure to turn off the Test Flag before making this page live! Review the information about toggling between Test and Production modes at http://www.nyu.edu/epayments/secure/create-a-payment-page.html -->
@@ -373,20 +373,20 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 						
 						<!--<label for="AMOUNT_EVT_1">Summary VAT Only (AMOUNT_EVT_1, Field will be HIDDEN on final Approval) AMOUNT_EVT_1 in future</label>-->
                         <input type="hidden" name="{{AMOUNT_EVT_1}}" id="{{AMOUNT_EVT_1}}" VALUE="0" readonly>
-                        <input type="hidden" name="{{ACCOUNT_EVT_1}}" id="{{ACCOUNT_EVT_1}}" value="22080" readonly>
-                        <input type="hidden" name="{{FUND_CODE_EVT_1}}" id="{{FUND_CODE_EVT_1}}"  value="10" readonly>
-                        <input type="hidden" name="{{DEPTID_EVT_1}}" id="{{DEPTID_EVT_1}}" value="00001" readonly>
-                        <input type="hidden" name="{{PROGRAM_CODE_EVT_1}}" id="{{PROGRAM_CODE_EVT_1}}" value="WSQPG" readonly>
-                        <input type="hidden" name="{{PROJECT_ID_EVT_1}}" id="{{PROJECT_ID_EVT_1}}" value="WSQPJ" readonly> 
+                        <input type="hidden" name="{{ACCOUNT_EVT_1}}" id="{{ACCOUNT_EVT_1}}" value="{{ACCOUNT_EVT_1_VALUE}}" readonly>
+                        <input type="hidden" name="{{FUND_CODE_EVT_1}}" id="{{FUND_CODE_EVT_1}}"  value="{{FUND_CODE_EVT_1_VALUE}}" readonly>
+                        <input type="hidden" name="{{DEPTID_EVT_1}}" id="{{DEPTID_EVT_1}}" value="{{DEPTID_EVT_1_VALUE}}" readonly>
+                        <input type="hidden" name="{{PROGRAM_CODE_EVT_1}}" id="{{PROGRAM_CODE_EVT_1}}" value="{{PROGRAM_CODE_EVT_1_VALUE}}" readonly>
+                        <input type="hidden" name="{{PROJECT_ID_EVT_1}}" id="{{PROJECT_ID_EVT_1}}" value="{{PROJECT_ID_EVT_1_VALUE}}" readonly> 
 
 						
 						<!-- <label for="AMOUNT_EVT_2">Summary of Gift Only (Field will be HIDDEN on final Approval) would be AMOUNT_EVT_2 in future</label> -->
                         <input type="hidden" name="{{AMOUNT_EVT_2}}" id="{{AMOUNT_EVT_2}}" VALUE="0" readonly>
-                        <input type="hidden" name="{{ACCOUNT_EVT_2}}" id ="{{ACCOUNT_EVT_2}}" value="23103" readonly>
-                        <input type="hidden" name="{{FUND_CODE_EVT_2}}" id="{{FUND_CODE_EVT_2}}" value="10" readonly>
-                        <input type="hidden" name="{{DEPTID_EVT_2}}" id="{{DEPTID_EVT_2}}" value="00001" readonly>
-                        <input type="hidden" name="{{PROGRAM_CODE_EVT_2}}" id="{{PROGRAM_CODE_EVT_2}}" value="WSQPG" readonly>
-                        <input type="hidden" name="{{PROJECT_ID_EVT_2}}" id="{{PROJECT_ID_EVT_2}}" value="WSQPJ" readonly>
+                        <input type="hidden" name="{{ACCOUNT_EVT_2}}" id ="{{ACCOUNT_EVT_2}}" value="{{ACCOUNT_EVT_2_VALUE}}" readonly>
+                        <input type="hidden" name="{{FUND_CODE_EVT_2}}" id="{{FUND_CODE_EVT_2}}" value="{{FUND_CODE_EVT_2_VALUE}}" readonly>
+                        <input type="hidden" name="{{DEPTID_EVT_2}}" id="{{DEPTID_EVT_2}}" value="{{DEPTID_EVT_2_VALUE}}" readonly>
+                        <input type="hidden" name="{{PROGRAM_CODE_EVT_2}}" id="{{PROGRAM_CODE_EVT_2}}" value="{{PROGRAM_CODE_EVT_2_VALUE}}" readonly>
+                        <input type="hidden" name="{{PROJECT_ID_EVT_2}}" id="{{PROJECT_ID_EVT_2}}" value="{{PROJECT_ID_EVT_2_VALUE}}" readonly>
 						
 
 						
@@ -832,13 +832,15 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 
         <p>
             <strong>
-            <a href="">
-            {{EVENT_NAME}} <br/>
-            </a>
+                <a href="{{EVENT_URL}}">
+                    {{EVENT_NAME}} 
+                    <br/>
+                </a>
             </strong>
-            {{EVENT_DESCRIPTION}}<br/><br/>
+            {{EVENT_DESCRIPTION}}
+            <br/><br/>
             <strong>
-            {{EVENT_ADDR_1}}<br/>
+                {{EVENT_ADDR_1}}<br/>
             </strong>
 			{{EVENT_ADDR_2}} <br />
 		    {{EVENT_ADDR_3}} <br />
@@ -846,7 +848,7 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 			email: <a href="mailto:{{EVENT_EMAIL}}">{{EVENT_EMAIL}}</a>  
 			<!-- <img src="" alt="LOGO" width="130" height="130"> -->
             
-            </p>
+        </p>
 		
 <h3>Notice</h3>
         <p>New York University is committed to respecting your privacy. You can be assured that personal information will only be used by New York University to conduct official University business and personal information will never be disseminated to any unaffiliated third party.</p>
