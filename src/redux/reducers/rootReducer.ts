@@ -6,6 +6,7 @@ import inputReducer from './inputReducer';
 import templateReducer from './templateReducer';
 import templateDialogReducer from './templateDialogReducer';
 import inputInfoDialogReducer from './inputInfoDialogReducer';
+import previewEditDialogReducer from './previewEditDialogReducer';
 
 const rootReducer = combineReducers({
   preview: previewReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   template: templateReducer,
   templateDialog: templateDialogReducer,
   inputInfoDialog: inputInfoDialogReducer,
+  previewEditDialog: previewEditDialogReducer,
 });
 
 export default rootReducer;

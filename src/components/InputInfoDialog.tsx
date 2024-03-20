@@ -10,10 +10,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setInputFields } from '../redux/actions/inputActions';
 import { toggleInputInfoDialog } from '../redux/actions/inputInfoDialogActions';
 import ImportExportIcon from '@mui/icons-material/ImportExport';
+import { useSnackbar, VariantType } from "notistack";
+
 
 export default function InputInfoDialog() {
   const dispatch = useDispatch();
   const inputState = useSelector((state: any) => state.input);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const addToSnackbar = (message: string, variant: VariantType) => {
+    enqueueSnackbar(message, { variant });
+  }
+
   const inputStateString = JSON.stringify(inputState, null, 2);
   const open = useSelector((state: any) => state.inputInfoDialog);
 
@@ -57,6 +65,7 @@ export default function InputInfoDialog() {
             if (isValidJson(newInputData))
             {
               dispatch(setInputFields(JSON.parse(newInputData)));
+              addToSnackbar('Input Loaded!', 'success');
               handleClose();
             }
           },
@@ -73,7 +82,9 @@ export default function InputInfoDialog() {
             .zip file. You can simply copy and paste its content below if you intend to make modifications to it.</p>
             <p>Make sure your input is in JSON format.</p>
           </DialogContentText>
-          <br/>
+          <Button variant='outlined' style={{marginBottom: '10px'}} disabled>
+            IMPORT DATA (UNDER CONSTRUCTION)
+          </Button>
           <TextField 
             label="Input Data"
             defaultValue={inputStateString}

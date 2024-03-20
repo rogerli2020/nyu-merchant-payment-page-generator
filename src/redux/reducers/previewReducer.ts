@@ -1,5 +1,3 @@
-// previewReducer.ts
-
 const initialState = `
     <!DOCTYPE html>
     <html lang="en">

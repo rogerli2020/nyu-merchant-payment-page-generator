@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { SnackbarProvider, VariantType, useSnackbar } from 'notistack';
 
 const theme = createTheme({
   palette: {
@@ -18,13 +19,17 @@ const theme = createTheme({
   }
 });
 
+document.title = 'Payment Page Maker - NYU Merchants';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <App />
+      <SnackbarProvider maxSnack={3}>
+        <App />
+      </SnackbarProvider>
     </ThemeProvider>
   </Provider>
 );

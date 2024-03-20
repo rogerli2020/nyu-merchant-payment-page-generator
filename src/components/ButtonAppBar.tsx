@@ -17,7 +17,7 @@ export default function ButtonAppBar() {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       // Change the opacity of the background color between 1 and 0.75 when scrolling from 100 to 150
-      const opacity = Math.max(0.75, Math.min(1, 1 - (scrollPosition - 150) / 1000));
+      const opacity = Math.max(0.8, Math.min(1, 1 - (scrollPosition - 150) / 1500));
       setBackgroundColorOpacity(opacity);
       
       // Change the opacity of the text between 0 and 1 when scrolling from 100 to 150
@@ -33,7 +33,10 @@ export default function ButtonAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='fixed' style={{ backdropFilter: 'blur(16px)', backgroundColor: `rgba(87, 6, 140, ${backgroundColorOpacity})` }}>
+      <AppBar 
+        position='fixed' 
+        style={{ backdropFilter: 'blur(16px)', backgroundColor: `rgba(87, 6, 140, ${backgroundColorOpacity})` }}
+      >
         <Toolbar>
           <IconButton
             size="large"

@@ -47,7 +47,7 @@ function MainComponent() {
                 >
                     <Grid style={{ display: "flex", flexDirection: "column", gap: "10px", flex: '1', height:'100%' }}>
                         <Typography variant="h6">
-                            NYU Payment Page Generator
+                            NYU Payment Page Maker
                         </Typography>
                         <Typography variant="subtitle2" style={{ justifyContent: 'center' }}>
                         <a
@@ -78,7 +78,7 @@ function MainComponent() {
                             }}
                             variant='subtitle1'
                         >
-                            © 2024 NYU Payment Page Generator Project.
+                            © 2024 NYU Payment Page Maker Project
                         </Typography>
                     </Grid>
 

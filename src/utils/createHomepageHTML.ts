@@ -100,22 +100,42 @@ function parseModifiersInput(input: string): ParsedInputArray {
 }
 
 
+function parseCyberSourceCF(inputString: string, number: string): Record<string, string> {
+  const fields: string[] = inputString.split('-');
+
+  const result: Record<string, string> = {};
+  result[`ACCOUNT_EVT_${number}_VALUE`] = fields[0];
+  result[`FUND_CODE_EVT_${number}_VALUE`] = fields[1];
+  result[`DEPTID_EVT_${number}_VALUE`] = fields[2];
+  result[`PROGRAM_CODE_EVT_${number}_VALUE`] = fields[3];
+  result[`PROJECT_ID_EVT_${number}_VALUE`] = fields[4];
+
+  return result;
+}
+
+
+
+
 const replacePlaceholders = (template: string, obj: any, ignoreFields: string[] = []): string =>
     template.replace(/{{(.*?)}}/g, (match, p1) => {
         const fieldName = p1.trim();
         if (ignoreFields.includes(fieldName)) {
             return match; // Return the original placeholder if it's in the ignore list
         }
-        return obj[fieldName];
+        if (obj.hasOwnProperty(fieldName)) { // Check if obj has the property
+            return obj[fieldName];
+        }
+        return match; // Return the original placeholder if obj[fieldName] does not exist
     }
-  );
+);
+
+
 
 
 const applyUserInput = (userInput: IFormInput, html: string) => {
 
   // determine payment processor
   const currProcessor: ProcessorEnum = userInput.paymentProcessor
-
 
   // handle simple fields that only need string replacement.
   html = html.replace('{{STORE_NAME}}', userInput.storeName);
@@ -129,6 +149,7 @@ const applyUserInput = (userInput: IFormInput, html: string) => {
   html = html.replace('{{EVENT_ADDR_2}}', userInput.eventAddr2);
   html = html.replace('{{EVENT_ADDR_3}}', userInput.eventAddr3);
   html = html.replace('{{EVENT_EMAIL}}', userInput.eventEmail);
+  html = html.replace('{{EVENT_EMAIL}}', userInput.eventEmail);
   html = html.replace('{{MODIFIERS_SECTION_TITLE}}', userInput.modifiersSectionTitle);
   html = html.replace('{{TERMS_OF_SERVICE}}', userInput.termsOfService);
 
@@ -141,7 +162,15 @@ const applyUserInput = (userInput: IFormInput, html: string) => {
 
 
   // handle chartfield information
-
+  if (currProcessor == ProcessorEnum.upay) {
+    html = replacePlaceholders(html, {ACCOUNT_EVT_1_VALUE:userInput.chartfield1});
+    html = replacePlaceholders(html, {ACCOUNT_EVT_2_VALUE:userInput.chartfield2});
+  } else if (currProcessor == ProcessorEnum.cybersource) {
+    const parsedInputCF1: Record<string, string> = parseCyberSourceCF(userInput.chartfield1, '1');
+    const parsedInputCF2: Record<string, string> = parseCyberSourceCF(userInput.chartfield2, '2');
+    html = replacePlaceholders(html, parsedInputCF1);
+    html = replacePlaceholders(html, parsedInputCF2);
+  }
 
   // handle modifiers section
   let modifiersSectionRawHTML: string = "";

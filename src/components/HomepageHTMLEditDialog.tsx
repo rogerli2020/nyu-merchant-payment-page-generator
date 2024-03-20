@@ -7,38 +7,35 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTemplate } from '../redux/actions/templateActions';
-import { toggleTemplateDialog } from '../redux/actions/templateDialogActions';
+import { setPreviewHtml } from '../redux/actions/previewActions';
+import { togglePreviewEditDialog } from '../redux/actions/previewEditDialogReducer';
 import EditIcon from '@mui/icons-material/Edit';
 import { useSnackbar, VariantType } from "notistack";
 
 
-export default function TemplateEditDialog() {
+export default function HomepageHTMLEditDialog() {
   const dispatch = useDispatch();
-  const templateState = useSelector((state: any) => state.template);
-  const open = useSelector((state: any) => state.templateDialog);
+  const previewHtml: string = useSelector((state: any) => state.preview);
+  const open = useSelector((state: any) => state.previewEditDialog);
   const { enqueueSnackbar } = useSnackbar();
 
   const addToSnackbar = (message: string, variant: VariantType) => {
     enqueueSnackbar(message, { variant });
   }
 
-  const basePath = process.env.PUBLIC_URL || '';
-  const defaultTemplateURL = `${basePath}/html_template/homepage.html`;
-
   const handleClickOpen = () => {
-    dispatch(toggleTemplateDialog());
+    dispatch(togglePreviewEditDialog());
   };
 
   const handleClose = () => {
-    dispatch(toggleTemplateDialog());
+    dispatch(togglePreviewEditDialog());
   };
 
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
         <EditIcon fontSize='small' style={{marginRight: '5px'}}/>
-        Edit Template
+        Edit Page HTML
       </Button>
       <Dialog
         fullWidth
@@ -51,9 +48,8 @@ export default function TemplateEditDialog() {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries((formData as any).entries());
-            const templateHTML = formJson.templateHTML;
-            dispatch(setTemplate(templateHTML));
-            addToSnackbar('Template Updated!', 'success');
+            const homepageHTML = formJson.homepageHTML;
+            dispatch(setPreviewHtml(homepageHTML));
             handleClose();
           },
         }}
@@ -61,23 +57,21 @@ export default function TemplateEditDialog() {
           "backdropFilter": "blur(10px)"
         }}
       >
-        <DialogTitle>Update Template HTML</DialogTitle>
+        <DialogTitle>Update Page HTML</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Copy and paste your own template's HTML here, or edit the HTML template below.<br/>
-            You can get the default template <a href={defaultTemplateURL} target="_blank">here</a>.
-            <p>Note: you're editing the template, <b><u>NOT</u></b> the HTML of the final payment page.</p>
+            BLAH BLAH Copy
           </DialogContentText>
           <Button variant='outlined' style={{marginBottom: '10px'}} disabled>
             IMPORT TEMPLATE (UNDER CONSTRUCTION)
           </Button>
           {/* <HtmlEditorComponent/> */}
           <TextField 
-            label="Template HTML"
-            defaultValue={templateState}
+            label="Homepage HTML"
+            defaultValue={previewHtml}
             variant="filled"
             multiline
-            name="templateHTML"
+            name="homepageHTML"
             minRows={50}
             maxRows={16384}
             fullWidth
