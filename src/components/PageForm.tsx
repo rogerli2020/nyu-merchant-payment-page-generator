@@ -100,8 +100,8 @@ export default function PageForm() {
       <TemplateEditDialog/>
       <InputInfoDialog/>
       <Divider/>
-      <Button variant="contained" color="error">
-        RESET ALL DATA
+      <Button variant="contained" color="error" disabled>
+        RESET ALL DATA (UNDER CONSTRUCTION)
       </Button>
       <form onSubmit={handleSubmit(onSubmit)} style={{ display: "flex", flexDirection: "column", gap: "10px", flex: '1' }}>
         
@@ -370,7 +370,7 @@ export default function PageForm() {
         </Button>
         <Button type="submit" variant="contained" disabled>
           <DownloadIcon fontSize='small'/>
-          GENERATE .ZIP FILE
+          GENERATE .ZIP FILE (UNDER CONSTRUCTION)
         </Button>
       </form>
     </div>

@@ -33,7 +33,7 @@ export default function HomepageHTMLEditDialog() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant='outlined' color='primary' sx={{ flexGrow: 1 }} onClick={handleClickOpen}>
         <EditIcon fontSize='small' style={{marginRight: '5px'}}/>
         Edit Page HTML
       </Button>
@@ -60,9 +60,9 @@ export default function HomepageHTMLEditDialog() {
         <DialogTitle>Update Page HTML</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            BLAH BLAH Copy
+            Directly edit the page HTML here.
           </DialogContentText>
-          <Button variant='outlined' style={{marginBottom: '10px'}} disabled>
+          <Button variant='outlined' style={{marginBottom: '10px', marginTop:'10px'}} disabled>
             IMPORT TEMPLATE (UNDER CONSTRUCTION)
           </Button>
           {/* <HtmlEditorComponent/> */}

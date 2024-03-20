@@ -35,7 +35,9 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar 
         position='fixed' 
-        style={{ backdropFilter: 'blur(16px)', backgroundColor: `rgba(87, 6, 140, ${backgroundColorOpacity})` }}
+        style={{ 
+          backdropFilter: 'blur(16px)', 
+          backgroundColor: `rgba(87, 6, 140, ${backgroundColorOpacity})` }}
       >
         <Toolbar>
           <IconButton
