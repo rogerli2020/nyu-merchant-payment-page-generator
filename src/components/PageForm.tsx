@@ -67,6 +67,8 @@ export interface IFormInput {
 
   // Payment Options Fields
   paymentOptions: string
+  vatx: Number
+  revenuex: Number
 
   // Promo Codes Fields
   promoCodes: string

@@ -981,8 +981,8 @@ font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
   var numVal2 = Number(document.getElementById("TRAN_EVT_2").value);		// User input value2		
   var numVal3 = Number(document.getElementById("TRAN_EVT_3").value);		// User input value3		
   var numVal3b = Number(document.getElementById("TRAN_EVT_3b").value);		// User input value4				
-  var numVal4 = Number(document.getElementById("vatx").value);     			// vat percentage .05	
-  var numVal5 = Number(document.getElementById("revenuex").value);			// Revenue percentage .95 or 1
+  var numVal4 = Number(document.getElementById("{{vatx}}").value);     			// vat percentage .05	
+  var numVal5 = Number(document.getElementById("{{revenuex}}").value);			// Revenue percentage .95 or 1
 
   var totalValue1 = (((numVal1 + numVal2 + numVal3 + numVal3b) * numVal4) + ((numVal1 + numVal2 + numVal3 + numVal3b) * numVal5)); // Total
   var totalValue2 = (numVal1  * numVal5);    								// TRAN_EVT_1 revenue percent

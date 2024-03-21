@@ -65,6 +65,18 @@ cybersourceFormTagTemplate:`		<form action="https://epaygate.nyu.edu/paygateapp/
 `,
 uPayFormTagTemplate:`		<form action="https://secure.touchnet.com/C21125_upay/web/index.jsp" method="post" name="web_form" id="web_form" >
 `,
+primaryFeeTemplate:`						<select for="TRAN_EVT_1" id="TRAN_APP_1" name="TRAN_APP_1"  onchange="handleAppTypeChange1()" onBlur="getTRAN_EVT_4" ononmouseup="getTRAN_EVT_4()" onmousedown="getTRAN_EVT_4()" onmouseover="getTRAN_EVT_4()" onmouseout="getTRAN_EVT_4()" onkeydown="getTRAN_EVT_4()"	onkeypress="getTRAN_EVT_4()" onSubmit="getTRAN_EVT_4()" >		
+<option value="none" selected="selected" disabled="disabled">Please Choose One...</option>			    
+<optgroup label="{{OPTION_NAME}}">
+{{OPTIONS}}
+</optgroup>	
+
+</select>
+
+<input type="hidden" id="TRAN_EVT_1" name="TRAN_EVT_1" value="0">
+`,
+paymentOptionTemplate:`<option value="{{OPTION_VALUE}}" >{{OPTION_NAME}}</option>
+`
 }
 
 
@@ -152,6 +164,8 @@ const applyUserInput = (userInput: IFormInput, html: string) => {
   html = html.replace('{{EVENT_EMAIL}}', userInput.eventEmail);
   html = html.replace('{{MODIFIERS_SECTION_TITLE}}', userInput.modifiersSectionTitle);
   html = html.replace('{{TERMS_OF_SERVICE}}', userInput.termsOfService);
+  html = html.replace('{{vatx}}', userInput.vatx.toString());
+  html = html.replace('{{revenuex}}', userInput.revenuex.toString());
 
 
   // handle form tag

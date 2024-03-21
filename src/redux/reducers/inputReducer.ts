@@ -8,7 +8,9 @@ text,zreg_lname,Registrant Last Name,true,64,Smith
 text,regEMAIL,Registrant's Email Address,true,32,abc123@nyu.edu`,
   refundPolicy: '<p>Keep in mind that this fee is nonrefundable, even if you ultimately cancel your attendance.</p>',
   termsOfService: '<i>Please note that the event expenses plus the 5% VAT tax on the fee(s) will be assessed. You acknowledge and accept charges accessed for the cost(s) and UAE VAT tax.</i>',
-
+  vatx: 0.05,
+  revenuex: 0.95,
+  
   // TEST DATA
   paymentProcessor: ProcessorEnum.cybersource,
   chartfield1: 'TEST-67890-10-11-12',
